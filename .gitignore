@@ -3,3 +3,4 @@ data/**
 !data/**/*.dvc
 models
 /predicted_vs_actual.png
+mlruns/*

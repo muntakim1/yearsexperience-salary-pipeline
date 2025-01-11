@@ -1,0 +1,29 @@
+stages:
+  preprocessing:
+    cmd: python scripts/preprocess.py
+    deps:
+      - params.yaml
+      - data/raw/Salary_Data.csv
+    params:
+      - preprocessing
+    outs:
+      - data/processed/train_scaled.csv
+      - data/processed/test_scaled.csv
+  train:
+    cmd: python scripts/train.py
+    deps:
+      - params.yaml
+      - data/processed/train_scaled.csv
+    params:
+      - training
+    outs:
+      - ./predicted_vs_actual.png
+  
+  evaluate:
+    cmd: python scripts/evaluate.py
+    params:
+      - training
+    deps:
+      - data/processed/test_scaled.csv
+    outs:
+      - metrics/metrics.yaml

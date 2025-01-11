@@ -1,0 +1,67 @@
+schema: '2.0'
+stages:
+  preprocessing:
+    cmd: python scripts/preprocess.py
+    deps:
+    - path: data/raw/Salary_Data.csv
+      hash: md5
+      md5: 05b9359561cec292c683d330a166a45a
+      size: 454
+    - path: params.yaml
+      hash: md5
+      md5: e652c37f64e4c7df03c16916063a9a90
+      size: 101
+    params:
+      params.yaml:
+        preprocessing:
+          random_state: 42
+          test_size: 0.2
+    outs:
+    - path: data/processed/test_scaled.csv
+      hash: md5
+      md5: 1b5c270bc02c6ba03e824c7eb3c8fb46
+      size: 191
+    - path: data/processed/train_scaled.csv
+      hash: md5
+      md5: 3410e4f4b6d07eb86e9f4f45f0e51a87
+      size: 686
+  train:
+    cmd: python scripts/train.py
+    deps:
+    - path: data/processed/train_scaled.csv
+      hash: md5
+      md5: 3410e4f4b6d07eb86e9f4f45f0e51a87
+      size: 686
+    - path: params.yaml
+      hash: md5
+      md5: e652c37f64e4c7df03c16916063a9a90
+      size: 101
+    params:
+      params.yaml:
+        training:
+          n_jobs: -1
+          cv: 7
+          random_state: 42
+    outs:
+    - path: ./predicted_vs_actual.png
+      hash: md5
+      md5: c5bea5563881fa0e74f9c61560c496c2
+      size: 34578
+  evaluate:
+    cmd: python scripts/evaluate.py
+    deps:
+    - path: data/processed/test_scaled.csv
+      hash: md5
+      md5: 1b5c270bc02c6ba03e824c7eb3c8fb46
+      size: 191
+    params:
+      params.yaml:
+        training:
+          n_jobs: -1
+          cv: 7
+          random_state: 42
+    outs:
+    - path: metrics/metrics.yaml
+      hash: md5
+      md5: c830f76c0357c5da8ec7402ed046e77a
+      size: 27

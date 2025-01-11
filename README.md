@@ -2,6 +2,8 @@
 
 This repository demonstrates a robust machine learning pipeline for predicting salaries based on years of experience using a **linear regression model**. The pipeline integrates tools like **DVC** for data and model versioning, **Airflow** for parameter scanning, and **MLflow** for tracking model performance.
 
+![demo](assets/1736587362418.jpeg)
+
 ---
 
 ## Table of Contents

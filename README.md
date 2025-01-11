@@ -79,7 +79,7 @@ The project focuses on:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/yearsexperience-salary-pipeline.git
+   git clone https://github.com/muntakim1/yearsexperience-salary-pipeline.git
    cd yearsexperience-salary-pipeline
    ```
 
